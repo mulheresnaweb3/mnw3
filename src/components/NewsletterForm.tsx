@@ -66,12 +66,12 @@ export default function NewsletterForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={status === 'submitting'}
-              className="flex-grow px-6 py-2 bg-transparent text-gray-800 placeholder:text-gray-400 focus:outline-none text-sm md:text-base disabled:opacity-50"
+              className="flex-grow min-w-0 basis-0 px-6 py-2 bg-transparent text-gray-800 placeholder:text-gray-400 focus:outline-none text-sm md:text-base disabled:opacity-50"
             />
             <button
               type="submit"
               disabled={status === 'submitting'}
-              className="h-10 md:h-12 px-6 md:px-10 bg-secondary hover:bg-secondary/90 text-white font-bold rounded-full transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center whitespace-nowrap min-w-[100px]"
+              className="h-10 md:h-12 px-6 md:px-10 bg-secondary hover:bg-secondary/90 text-white font-bold rounded-full transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center whitespace-nowrap min-w-[100px] shrink-0"
             >
               {status === 'submitting' ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
