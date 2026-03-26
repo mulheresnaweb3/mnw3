@@ -32,7 +32,7 @@ export const communityEvents: CommunityEvent[] = [
     time: '',
     spots: ''
   },
-    {
+  {
     title: 'SheFI Brazil',
     date: '07 de abril - 19 horas',
     location: 'Online',

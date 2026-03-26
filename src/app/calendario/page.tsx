@@ -186,9 +186,7 @@ export default function CalendarioPage() {
               </div>
             </div>
           </div>
-        </section>
-
-        
+        </section>       
 
       </main>
 
