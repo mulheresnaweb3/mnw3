@@ -1,5 +1,22 @@
 
-export const communityEvents = [
+export interface CommunityEvent {
+  title: string
+  date: string
+  location?: string
+  description?: string
+  coupon?: string
+  link?: string
+  image?: string
+  type: string
+  badge?: string
+  color?: string
+  bg?: string
+  isFeatured?: boolean
+  time?: string
+  spots?: string
+}
+
+export const communityEvents: CommunityEvent[] = [
   {
     title: 'Web3Experts Brazil 2026',
     date: '26, 27 e 28 de junho de 2026',
@@ -9,6 +26,21 @@ export const communityEvents = [
     link: 'https://www.sympla.com.br/evento/web3experts-brazil-2026/3323454',
     image: '/images/events/events-web3.jpeg',
     type: 'evento',
+    badge: 'Destaque',
+    color: 'ring-primary',
+    isFeatured: true,
+    time: '',
+    spots: ''
+  },
+    {
+    title: 'SheFI Brazil',
+    date: '07 de abril - 19 horas',
+    location: 'Online',
+    description: 'Tokenização de Ativos: Do Zero ao Entendimento. Mais do que teoria, essa conversa vai te ajudar a entender:\n- O que é tokenização de ativos na prática\n- Como bens do dia a dia — como imóveis e obras de arte — viram ativos digitais\n- Onde estão as oportunidades reais nesse mercado em crescimento',
+    coupon: '',
+    link: 'https://luma.com/5lvth3yt',
+    image: '/images/events/SheFi.jpeg',
+    type: 'Meetup',
     badge: 'Destaque',
     color: 'ring-primary',
     isFeatured: true,

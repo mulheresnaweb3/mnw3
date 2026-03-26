@@ -37,8 +37,8 @@ export default function CalendarioPage() {
               Não perca as próximas oportunidades de aprendizado e networking
             </p>
             <div className="mt-10 flex justify-center">
-              <div className="grid gap-6 md:grid-cols-1 max-w-md w-full">
-                {communityEvents.filter(e => e.type === 'evento').map((e) => (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 w-full">
+                {communityEvents.filter(e => e.type !== 'anuncio').map((e) => (
                   <div key={e.title} className="rounded-2xl bg-white px-6 py-6 shadow-lg ring-2 ring-secondary h-full min-h-[300px] flex flex-col">
                     {e.image && <div className="relative h-64 w-full mb-4"><Image src={e.image} alt={e.title} fill className="rounded-xl object-cover" /></div>}
                     <div className="flex items-center justify-between">
@@ -69,7 +69,11 @@ export default function CalendarioPage() {
                         {e.spots}
                       </span>}
                     </div>
-                    {e.description && <p className="mt-4 text-sm text-gray-600">{e.description}</p>}
+                    {e.description && (
+                      <p className="mt-4 text-sm text-gray-600 whitespace-pre-line leading-relaxed">
+                        {e.description}
+                      </p>
+                    )}
                     {e.coupon && <div className="mt-4 text-sm font-semibold">Cupom de 10% de desconto: <span className="text-secondary">{e.coupon}</span></div>}
                     <div className="flex-1" />
                     <Link href={e.link || '#'} target="_blank" className="mt-6 inline-flex w-full items-center justify-center rounded-md bg-secondary px-6 py-3 text-xs font-semibold text-white shadow-sm transition hover:bg-secondary/90">
@@ -79,38 +83,6 @@ export default function CalendarioPage() {
                 ))}
               </div>
             </div>
-            {/* <div className="mt-10 grid gap-6 md:grid-cols-3">
-              {[
-                { type: 'Mentoria', title: 'Mentoria em Grupo: Carreira Web3', date: '22 Jan 2026', time: '18:00 - 19:30' },
-                { type: 'Palestra', title: 'Palestra: DeFi para Iniciantes', date: '24 Jan 2026', time: '20:00 - 21:00' },
-                { type: 'Workshop', title: 'Code Review Session', date: '26 Jan 2026', time: '15:00 - 17:00' }
-              ].map((e) => (
-                <div key={e.title} className="rounded-2xl bg-white px-6 py-6 shadow-sm ring-1 ring-gray-200">
-                  <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                      {e.type === 'Mentoria' && <GraduationCap className="mr-1.5 h-3 w-3" />}
-                      {e.type === 'Palestra' && <Mic className="mr-1.5 h-3 w-3" />}
-                      {e.type === 'Workshop' && <Wrench className="mr-1.5 h-3 w-3" />}
-                      {e.type}
-                    </span>
-                  </div>
-                  <h3 className="mt-3 text-sm font-semibold text-foreground">{e.title}</h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <span className="inline-flex items-center rounded-full bg-[#efe7ff] px-3 py-1 text-[11px] font-semibold text-[#6f42c1] ring-1 ring-[#6f42c1]/20">
-                      <CalendarIcon className="mr-1.5 h-3 w-3" />
-                      {e.date}
-                    </span>
-                    <span className="inline-flex items-center rounded-full bg-[#efe7ff] px-3 py-1 text-[11px] font-semibold text-[#6f42c1] ring-1 ring-[#6f42c1]/20">
-                      <Clock className="mr-1.5 h-3 w-3" />
-                      {e.time}
-                    </span>
-                  </div>
-                  <Link href="#" className="mt-4 inline-flex items-center justify-center rounded-md border border-primary px-6 py-2 text-xs font-semibold text-primary transition hover:bg-primary/10">
-                    Ver Detalhes
-                  </Link>
-                </div>
-              ))}
-            </div> */}
           </div>
         </section>
 
@@ -165,7 +137,7 @@ export default function CalendarioPage() {
           </div>
         </section> */}
 
-        {/* <section className="bg-white py-20 md:py-24">
+        <section className="bg-white py-20 md:py-24">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl md:text-4xl font-semibold text-foreground text-center">
               Avisos e Recados
@@ -174,32 +146,31 @@ export default function CalendarioPage() {
               Comunicados importantes da comunidade
             </p>
             <div className="mt-8 space-y-4">
-              {[
-                { title: 'Novo Discord Server Lançado', desc: 'Migramos para um servidor Discord mais robusto com canais organizados por tópicos. Faça seu cadastro novamente!', date: '10 Jan 2026', badges: ['Comunicado', 'URGENTE'], color: 'ring-secondary', bg: 'bg-[#fff2ec]' },
-                { title: 'Chamada para Mentoras Voluntárias', desc: 'Estamos buscando mulheres com experiência em Web3 para mentorar iniciantes. Se você tem pelo menos 1 ano de experiência, candidate-se!', date: '9 Jan 2026', badges: ['Convite'], color: 'ring-primary', bg: 'bg-white' },
-                { title: 'Parceria com Ethereum Foundation', desc: 'Temos o prazer de anunciar nossa nova parceria que trará grants e oportunidades para a comunidade!', date: '8 Jan 2026', badges: ['Comunicado'], color: 'ring-primary', bg: 'bg-white' },
-              ].map((n) => (
-                <div key={n.title} className={`rounded-2xl ${n.bg} px-6 py-6 shadow-sm ring-2 ${n.color}`}>
+              {communityEvents.filter(e => e.type === 'anuncio').map((n) => (
+                <div key={n.title} className={`rounded-2xl ${n.bg || 'bg-white'} px-6 py-6 shadow-sm ring-2 ${n.color || 'ring-primary'}`}>
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-2">
-                      {n.badges.map((b) => (
+                      {n.badge && (
                         <span
-                          key={b}
-                          className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold ${b === 'Convite' ? 'bg-primary text-white' : 'bg-secondary text-white'}`}
+                          className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold ${n.badge === 'Convite' ? 'bg-primary text-white' : 'bg-secondary text-white'}`}
                         >
-                          {b}
+                          {n.badge}
                         </span>
-                      ))}
+                      )}
                     </div>
                     <div className="text-[11px] text-gray-600">{n.date}</div>
                   </div>
                   <div className="mt-3 text-sm font-semibold text-foreground">{n.title}</div>
-                  <p className="mt-2 text-xs text-gray-700">{n.desc}</p>
+                  {n.description && (
+                    <p className="mt-2 text-xs text-gray-700 whitespace-pre-line leading-relaxed">
+                      {n.description}
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
           </div>
-        </section> */}
+        </section>
 
         <section className="bg-white py-12 mb-16">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
