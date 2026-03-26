@@ -1,5 +1,22 @@
 
-export const communityEvents = [
+export interface CommunityEvent {
+  title: string
+  date: string
+  location?: string
+  description?: string
+  coupon?: string
+  link?: string
+  image?: string
+  type: string
+  badge?: string
+  color?: string
+  bg?: string
+  isFeatured?: boolean
+  time?: string
+  spots?: string
+}
+
+export const communityEvents: CommunityEvent[] = [
   {
     title: 'Web3Experts Brazil 2026',
     date: '26, 27 e 28 de junho de 2026',
