@@ -32,6 +32,21 @@ export const communityEvents: CommunityEvent[] = [
     time: '',
     spots: ''
   },
+    {
+    title: 'SheFI Brazil',
+    date: '07 de abril - 19 horas',
+    location: 'Online',
+    description: 'Tokenização de Ativos: Do Zero ao Entendimento. Mais do que teoria, essa conversa vai te ajudar a entender:\n- O que é tokenização de ativos na prática\n- Como bens do dia a dia — como imóveis e obras de arte — viram ativos digitais\n- Onde estão as oportunidades reais nesse mercado em crescimento',
+    coupon: '',
+    link: 'https://luma.com/5lvth3yt',
+    image: '/images/events/SheFi.jpeg',
+    type: 'Meetup',
+    badge: 'Destaque',
+    color: 'ring-primary',
+    isFeatured: true,
+    time: '',
+    spots: ''
+  },
   // { 
   //   title: 'Novo Discord Server Lançado', 
   //   description: 'Migramos para um servidor Discord mais robusto com canais organizados por tópicos. Faça seu cadastro novamente!', 
