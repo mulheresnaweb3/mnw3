@@ -40,7 +40,7 @@ export default function CalendarioPage() {
               <div className="grid gap-6 md:grid-cols-1 max-w-md w-full">
                 {communityEvents.filter(e => e.type === 'evento').map((e) => (
                   <div key={e.title} className="rounded-2xl bg-white px-6 py-6 shadow-lg ring-2 ring-secondary h-full min-h-[300px] flex flex-col">
-                    {e.image && <div className="relative h-40 w-full mb-4"><Image src={e.image} alt={e.title} fill className="rounded-xl object-cover" /></div>}
+                    {e.image && <div className="relative h-64 w-full mb-4"><Image src={e.image} alt={e.title} fill className="rounded-xl object-cover" /></div>}
                     <div className="flex items-center justify-between">
                       <span className="inline-flex items-center rounded-full bg-secondary/10 px-3 py-1 text-xs font-semibold text-secondary">
                         {e.type === 'Workshop' && <Wrench className="mr-1.5 h-3 w-3" />}
