@@ -336,9 +336,9 @@ export default function Home() {
                           <div className="text-sm font-semibold text-foreground">{n.title}</div>
                           <div className="text-[11px] text-gray-600 mt-1">{n.date}</div>
                         </div>
-                        {n.badge && (
+                        {n.type && (
                           <span className="inline-flex rounded-full bg-secondary px-3 py-1 text-[11px] font-semibold text-white">
-                            {n.badge}
+                            {n.type}
                           </span>
                         )}
                       </div>
