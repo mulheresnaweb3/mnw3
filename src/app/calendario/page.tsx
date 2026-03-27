@@ -10,6 +10,10 @@ import NewsletterForm from '@/components/NewsletterForm'
 import { communityEvents } from '@/lib/community-events'
 
 export default function CalendarioPage() {
+  const today = new Date().toISOString().split('T')[0]
+  
+  const activeEvents = communityEvents.filter(e => !e.expiryDate || e.expiryDate >= today)
+
   return (
     <div className="min-h-screen font-sans flex flex-col bg-background">
       <Header />
@@ -38,7 +42,7 @@ export default function CalendarioPage() {
             </p>
             <div className="mt-10 flex justify-center">
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 w-full">
-                {communityEvents.filter(e => e.type !== 'anuncio').map((e) => (
+                {activeEvents.filter(e => e.type !== 'anuncio').map((e) => (
                   <div key={e.title} className="rounded-2xl bg-white px-6 py-6 shadow-lg ring-2 ring-secondary h-full min-h-[300px] flex flex-col">
                     {e.image && <div className="relative h-64 w-full mb-4"><Image src={e.image} alt={e.title} fill className="rounded-xl object-cover" /></div>}
                     <div className="flex items-center justify-between">
@@ -146,7 +150,7 @@ export default function CalendarioPage() {
               Comunicados importantes da comunidade
             </p>
             <div className="mt-8 space-y-4">
-              {communityEvents.filter(e => e.type === 'anuncio').map((n) => (
+              {activeEvents.filter(e => e.type === 'anuncio').map((n) => (
                 <div key={n.title} className={`rounded-2xl ${n.bg || 'bg-white'} px-6 py-6 shadow-sm ring-2 ${n.color || 'ring-primary'}`}>
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-2">

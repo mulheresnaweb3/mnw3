@@ -14,6 +14,7 @@ export interface CommunityEvent {
   isFeatured?: boolean
   time?: string
   spots?: string
+  expiryDate?: string // Formato: YYYY-MM-DD
 }
 
 export const communityEvents: CommunityEvent[] = [
@@ -30,7 +31,8 @@ export const communityEvents: CommunityEvent[] = [
     color: 'ring-primary',
     isFeatured: true,
     time: '',
-    spots: ''
+    spots: '',
+    expiryDate: '2026-06-29'
   },
     {
     title: 'SheFI Brazil',
@@ -45,28 +47,20 @@ export const communityEvents: CommunityEvent[] = [
     color: 'ring-primary',
     isFeatured: true,
     time: '',
-    spots: ''
+    spots: '',
+    expiryDate: '2026-04-08'
   },
-  // { 
-  //   title: 'Novo Discord Server Lançado', 
-  //   description: 'Migramos para um servidor Discord mais robusto com canais organizados por tópicos. Faça seu cadastro novamente!', 
-  //   date: '10 Jan 2026', 
-  //   badge: 'Comunicado', 
-  //   color: 'ring-secondary', 
-  //   bg: 'bg-[#fff2ec]',
-  //   type: 'anuncio',
-  //   image: '/images/events/events-web3.jpeg'
-  // },
-  // { 
-  //   title: 'Chamada para Mentoras Voluntárias', 
-  //   description: 'Estamos buscando mulheres com experiência em Web3 para mentorar iniciantes. Se você tem pelo menos 1 ano de experiência, candidate-se!', 
-  //   date: '9 Jan 2026', 
-  //   badge: 'Convite', 
-  //   color: 'ring-primary', 
-  //   bg: 'bg-white',
-  //   type: 'anuncio',
-  //   image: '/images/events/events-web3.jpeg'
-  // },
+  { 
+    title: 'Chamada para Mentoras Voluntárias', 
+    description: 'Estamos buscando mulheres com experiência em Web3 para mentorar iniciantes. Se você tem pelo menos 1 ano de experiência, candidate-se!', 
+    date: '9 Jan 2026', 
+    badge: 'Convite', 
+    color: 'ring-primary', 
+    bg: 'bg-white',
+    type: 'anuncio',
+    image: '/images/events/events-web3.jpeg',
+    expiryDate: '2026-01-29'
+  },
   // { 
   //   title: 'Parceria com Ethereum Foundation', 
   //   description: 'Temos o prazer de anunciar nossa nova parceria que trará grants e oportunidades para a comunidade!', 
@@ -75,7 +69,8 @@ export const communityEvents: CommunityEvent[] = [
   //   color: 'ring-primary', 
   //   bg: 'bg-white',
   //   type: 'anuncio',
-  //   image: '/images/events/events-web3.jpeg'
+  //   image: '/images/events/events-web3.jpeg',
+  //   expiryDate: '2026-12-31'
   // },
   // { 
   //   title: 'Inscrições abertas: Hackathon Mulheres na Web3 2026', 
@@ -83,20 +78,23 @@ export const communityEvents: CommunityEvent[] = [
   //   badge: 'Urgente', 
   //   color: 'ring-secondary',
   //   type: 'anuncio',
-  //   image: '/images/events/events-web3.jpeg'
+  //   image: '/images/events/events-web3.jpeg',
+  //   expiryDate: '2026-01-31'
   // },
   // { 
   //   title: 'Nova trilha de aprendizado: DeFi do Zero', 
   //   date: '11 Jan 2026', 
   //   color: 'ring-[#6f42c1]',
   //   type: 'anuncio',
-  //   image: '/images/events/events-web3.jpeg'
+  //   image: '/images/events/events-web3.jpeg',
+  //   expiryDate: '2026-12-31'
   // },
   // { 
   //   title: 'Meetup presencial em São Paulo - 20/Jan', 
   //   date: '10 Jan 2026', 
   //   color: 'ring-primary',
   //   type: 'anuncio',
-  //   image: '/images/events/events-web3.jpeg'
+  //   image: '/images/events/events-web3.jpeg',
+  //   expiryDate: '2026-01-21'
   // },
 ];

@@ -11,6 +11,9 @@ import { COMMUNITY_LINK } from '@/constants/links'
 import { communityEvents } from '@/lib/community-events'
 
 export default function Home() {
+  const today = new Date().toISOString().split('T')[0]
+  const activeEvents = communityEvents.filter(e => !e.expiryDate || e.expiryDate >= today)
+
   return (
     <div className="min-h-screen font-sans flex flex-col">
       <Header />
@@ -313,7 +316,7 @@ export default function Home() {
               Fique por dentro das novidades e oportunidades
             </p>
             <div className="mt-8 space-y-4">
-              {communityEvents.filter(e => e.isFeatured || e.type === 'anuncio').map((n) => (
+              {activeEvents.filter(e => e.isFeatured || e.type === 'anuncio').map((n) => (
                 <Link href={n.link || '#'} key={n.title} target="_blank" className={`block rounded-2xl bg-white px-6 py-6 shadow-sm ring-2 ${n.color} transition hover:shadow-md`}>
                   <div className="flex items-start gap-4">
                     {n.image && (
