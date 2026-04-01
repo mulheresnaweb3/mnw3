@@ -34,7 +34,7 @@ export const communityEvents: CommunityEvent[] = [
     spots: '',
     expiryDate: '2026-06-29'
   },
-    {
+  {
     title: 'SheFI Brazil',
     date: '07 de abril - 19 horas',
     location: 'Online',
@@ -50,17 +50,23 @@ export const communityEvents: CommunityEvent[] = [
     spots: '',
     expiryDate: '2026-04-08'
   },
-  { 
-    title: 'Chamada para Mentoras Voluntárias', 
-    description: 'Estamos buscando mulheres com experiência em Web3 para mentorar iniciantes. Se você tem pelo menos 1 ano de experiência, candidate-se!', 
-    date: '9 Jan 2026', 
-    badge: 'Convite', 
-    color: 'ring-primary', 
-    bg: 'bg-white',
-    type: 'anuncio',
-    image: '/images/events/events-web3.jpeg',
-    expiryDate: '2026-01-29'
+  {
+    title: 'Web3 SP',
+    date: '11 de abril 2026 - 14h às 21h',
+    location: 'Oracle — São Paulo/SP',
+    description: 'O Web3 SP chega a São Paulo como um ponto de encontro para quem quer aprender, se conectar e explorar oportunidades reais no ecossistema Web3, reunindo conteúdo prático, networking e especialistas do mercado — com o apoio da Oracle e da Mulheres na Web3 ',
+    coupon: '',
+    link: 'https://luma.com/1ikdxopt',
+    image: '/images/events/web3sp.jpeg',
+    type: 'evento',
+    badge: 'Destaque',
+    color: 'ring-primary',
+    isFeatured: true,
+    time: '',
+    spots: '',
+    expiryDate: '2026-04-11'
   },
+
   // { 
   //   title: 'Parceria com Ethereum Foundation', 
   //   description: 'Temos o prazer de anunciar nossa nova parceria que trará grants e oportunidades para a comunidade!', 
