@@ -12,7 +12,13 @@ import { communityEvents } from '@/lib/community-events'
 
 export default function Home() {
   const today = new Date().toISOString().split('T')[0]
-  const activeEvents = communityEvents.filter(e => !e.expiryDate || e.expiryDate >= today)
+  const activeEvents = [...communityEvents]
+    .filter(e => !e.expiryDate || e.expiryDate >= today)
+    .sort((a, b) => {
+      const dateA = a.expiryDate || '9999-12-31'
+      const dateB = b.expiryDate || '9999-12-31'
+      return dateA.localeCompare(dateB)
+    })
 
   return (
     <div className="min-h-screen font-sans flex flex-col">
