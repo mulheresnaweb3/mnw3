@@ -10,13 +10,13 @@ import NewsletterForm from '@/components/NewsletterForm'
 import { communityEvents } from '@/lib/community-events'
 
 export default function CalendarioPage() {
-  const today = new Date().toISOString().split('T')[0]
+  const now = new Date().toISOString()
   
   const activeEvents = [...communityEvents]
-    .filter(e => !e.expiryDate || e.expiryDate >= today)
+    .filter(e => !e.expiryDate || e.expiryDate >= now)
     .sort((a, b) => {
-      const dateA = a.expiryDate || '9999-12-31'
-      const dateB = b.expiryDate || '9999-12-31'
+      const dateA = a.expiryDate || '9999-12-31T23:59:59'
+      const dateB = b.expiryDate || '9999-12-31T23:59:59'
       return dateA.localeCompare(dateB)
     })
 

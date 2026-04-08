@@ -14,7 +14,7 @@ export interface CommunityEvent {
   isFeatured?: boolean
   time?: string
   spots?: string
-  expiryDate?: string // Formato: YYYY-MM-DD
+  expiryDate?: string // Formato: YYYY-MM-DDTHH:mm:ss
 }
 
 export const communityEvents: CommunityEvent[] = [
@@ -32,7 +32,7 @@ export const communityEvents: CommunityEvent[] = [
     isFeatured: true,
     time: '',
     spots: '',
-    expiryDate: '2026-06-29'
+    expiryDate: '2026-06-28T23:59:59'
   },
   {
     title: 'SheFI Brazil',
@@ -48,7 +48,7 @@ export const communityEvents: CommunityEvent[] = [
     isFeatured: true,
     time: '',
     spots: '',
-    expiryDate: '2026-04-08'
+    expiryDate: '2026-04-07T23:59:59'
   },
   {
     title: 'Web3 SP',
@@ -64,7 +64,7 @@ export const communityEvents: CommunityEvent[] = [
     isFeatured: true,
     time: '',
     spots: '',
-    expiryDate: '2026-04-11'
+    expiryDate: '2026-04-11T23:59:59'
   },
 
   // { 
