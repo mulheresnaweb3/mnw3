@@ -20,6 +20,16 @@ export default function CalendarioPage() {
       return dateA.localeCompare(dateB)
     })
 
+  const expiredEvents = [...communityEvents]
+    .filter(e => e.expiryDate && e.expiryDate < now)
+    .sort((a, b) => {
+      const dateA = a.expiryDate || '0000-00-00T00:00:00'
+      const dateB = b.expiryDate || '0000-00-00T00:00:00'
+      return dateB.localeCompare(dateA) // Descendente: mais novos primeiro
+    })
+
+  const allEvents = [...activeEvents, ...expiredEvents]
+
   return (
     <div className="min-h-screen font-sans flex flex-col bg-background">
       <Header />
@@ -48,49 +58,65 @@ export default function CalendarioPage() {
             </p>
             <div className="mt-10 flex justify-center">
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 w-full">
-                {activeEvents.filter(e => e.type !== 'anuncio').map((e) => (
-                  <div key={e.title} className="rounded-2xl bg-white px-6 py-6 shadow-lg ring-2 ring-secondary h-full min-h-[300px] flex flex-col">
-                    {e.image && <div className="relative h-64 w-full mb-4"><Image src={e.image} alt={e.title} fill className="rounded-xl object-cover" /></div>}
-                    <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center rounded-full bg-secondary/10 px-3 py-1 text-xs font-semibold text-secondary">
-                        {e.type === 'Workshop' && <Wrench className="mr-1.5 h-3 w-3" />}
-                        {(e.type === 'evento' || e.type === 'Evento') && <CalendarIcon className="mr-1.5 h-3 w-3" />}
-                        {e.type === 'Hackathon' && <Trophy className="mr-1.5 h-3 w-3" />}
-                        {e.type.charAt(0).toUpperCase() + e.type.slice(1)}
-                      </span>
-                      {e.badge && <span className="inline-flex rounded-full bg-secondary px-3 py-1 text-[11px] font-semibold text-white">{e.badge}</span>}
+                {allEvents.filter(e => e.type !== 'anuncio').map((e) => {
+                  const isExpired = e.expiryDate && e.expiryDate < now;
+                  return (
+                    <div key={e.title} className={`relative rounded-2xl bg-white px-6 py-6 shadow-lg ring-2 ${isExpired ? 'ring-gray-300' : 'ring-secondary'} h-full min-h-[300px] flex flex-col ${isExpired ? 'grayscale opacity-70 cursor-not-allowed' : ''}`}>
+                      {isExpired && (
+                        <div className="absolute inset-0 z-20 rounded-2xl bg-gray-200/40 flex items-center justify-center pointer-events-none">
+                          <span className="bg-gray-800 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest opacity-90">
+                            Encerrado
+                          </span>
+                        </div>
+                      )}
+                      {e.image && <div className="relative h-64 w-full mb-4"><Image src={e.image} alt={e.title} fill className="rounded-xl object-cover" /></div>}
+                      <div className="flex items-center justify-between">
+                        <span className={`inline-flex items-center rounded-full ${isExpired ? 'bg-gray-200 text-gray-600' : 'bg-secondary/10 text-secondary'} px-3 py-1 text-xs font-semibold`}>
+                          {e.type === 'Workshop' && <Wrench className="mr-1.5 h-3 w-3" />}
+                          {(e.type === 'evento' || e.type === 'Evento') && <CalendarIcon className="mr-1.5 h-3 w-3" />}
+                          {e.type === 'Hackathon' && <Trophy className="mr-1.5 h-3 w-3" />}
+                          {e.type.charAt(0).toUpperCase() + e.type.slice(1)}
+                        </span>
+                        {e.badge && <span className={`inline-flex rounded-full ${isExpired ? 'bg-gray-400' : 'bg-secondary'} px-3 py-1 text-[11px] font-semibold text-white`}>{e.badge}</span>}
+                      </div>
+                      <h3 className="mt-4 text-lg font-semibold text-foreground">{e.title}</h3>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        <span className={`inline-flex items-center rounded-full ${isExpired ? 'bg-gray-100 text-gray-500' : 'bg-[#ffe6d6] text-[#f45920]'} px-3 py-1 text-[11px] font-semibold ring-1 ${isExpired ? 'ring-gray-200' : 'ring-[#f45920]/20'}`}>
+                          <CalendarIcon className="mr-1.5 h-3 w-3" />
+                          {e.date}
+                        </span>
+                        {e.time && <span className={`inline-flex items-center rounded-full ${isExpired ? 'bg-gray-100 text-gray-500' : 'bg-[#ffe6d6] text-[#f45920]'} px-3 py-1 text-[11px] font-semibold ring-1 ${isExpired ? 'ring-gray-200' : 'ring-[#f45920]/20'}`}>
+                          <Clock className="mr-1.5 h-3 w-3" />
+                          {e.time}
+                        </span>}
+                        <span className={`inline-flex items-center rounded-full ${isExpired ? 'bg-gray-100 text-gray-500' : 'bg-[#ffe6d6] text-[#f45920]'} px-3 py-1 text-[11px] font-semibold ring-1 ${isExpired ? 'ring-gray-200' : 'ring-[#f45920]/20'}`}>
+                          <MapPin className="mr-1.5 h-3 w-3" />
+                          {e.location}
+                        </span>
+                        {e.spots && <span className={`inline-flex items-center rounded-full ${isExpired ? 'bg-gray-100 text-gray-500' : 'bg-[#ffe6d6] text-[#f45920]'} px-3 py-1 text-[11px] font-semibold ring-1 ${isExpired ? 'ring-gray-200' : 'ring-[#f45920]/20'}`}>
+                          <Users className="mr-1.5 h-3 w-3" />
+                          {e.spots}
+                        </span>}
+                      </div>
+                      {e.description && (
+                        <p className="mt-4 text-sm text-gray-600 whitespace-pre-line leading-relaxed">
+                          {e.description}
+                        </p>
+                      )}
+                      {e.coupon && <div className="mt-4 text-sm font-semibold">Cupom de 10% de desconto: <span className={isExpired ? 'text-gray-500' : 'text-secondary'}>{e.coupon}</span></div>}
+                      <div className="flex-1" />
+                      {isExpired ? (
+                        <div className="mt-6 inline-flex w-full items-center justify-center rounded-md bg-gray-400 px-6 py-3 text-xs font-semibold text-white shadow-sm cursor-not-allowed">
+                          Evento Encerrado
+                        </div>
+                      ) : (
+                        <Link href={e.link || '#'} target="_blank" className="mt-6 inline-flex w-full items-center justify-center rounded-md bg-secondary px-6 py-3 text-xs font-semibold text-white shadow-sm transition hover:bg-secondary/90">
+                          {e.link ? 'Garanta sua vaga' : 'Ver detalhes'}
+                        </Link>
+                      )}
                     </div>
-                    <h3 className="mt-4 text-lg font-semibold text-foreground">{e.title}</h3>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      <span className="inline-flex items-center rounded-full bg-[#ffe6d6] px-3 py-1 text-[11px] font-semibold text-[#f45920] ring-1 ring-[#f45920]/20">
-                        <CalendarIcon className="mr-1.5 h-3 w-3" />
-                        {e.date}
-                      </span>
-                      {e.time && <span className="inline-flex items-center rounded-full bg-[#ffe6d6] px-3 py-1 text-[11px] font-semibold text-[#f45920] ring-1 ring-[#f45920]/20">
-                        <Clock className="mr-1.5 h-3 w-3" />
-                        {e.time}
-                      </span>}
-                      <span className="inline-flex items-center rounded-full bg-[#ffe6d6] px-3 py-1 text-[11px] font-semibold text-[#f45920] ring-1 ring-[#f45920]/20">
-                        <MapPin className="mr-1.5 h-3 w-3" />
-                        {e.location}
-                      </span>
-                      {e.spots && <span className="inline-flex items-center rounded-full bg-[#ffe6d6] px-3 py-1 text-[11px] font-semibold text-[#f45920] ring-1 ring-[#f45920]/20">
-                        <Users className="mr-1.5 h-3 w-3" />
-                        {e.spots}
-                      </span>}
-                    </div>
-                    {e.description && (
-                      <p className="mt-4 text-sm text-gray-600 whitespace-pre-line leading-relaxed">
-                        {e.description}
-                      </p>
-                    )}
-                    {e.coupon && <div className="mt-4 text-sm font-semibold">Cupom de 10% de desconto: <span className="text-secondary">{e.coupon}</span></div>}
-                    <div className="flex-1" />
-                    <Link href={e.link || '#'} target="_blank" className="mt-6 inline-flex w-full items-center justify-center rounded-md bg-secondary px-6 py-3 text-xs font-semibold text-white shadow-sm transition hover:bg-secondary/90">
-                      {e.link ? 'Garanta sua vaga' : 'Ver detalhes'}
-                    </Link>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -156,28 +182,35 @@ export default function CalendarioPage() {
               Comunicados importantes da comunidade
             </p>
             <div className="mt-8 space-y-4">
-              {activeEvents.filter(e => e.type === 'anuncio').map((n) => (
-                <div key={n.title} className={`rounded-2xl ${n.bg || 'bg-white'} px-6 py-6 shadow-sm ring-2 ${n.color || 'ring-primary'}`}>
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-2">
-                      {n.badge && (
-                        <span
-                          className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold ${n.badge === 'Convite' ? 'bg-primary text-white' : 'bg-secondary text-white'}`}
-                        >
-                          {n.badge}
-                        </span>
-                      )}
+              {allEvents.filter(e => e.type === 'anuncio').map((n) => {
+                const isExpired = n.expiryDate && n.expiryDate < now;
+                return (
+                  <div key={n.title} className={`relative rounded-2xl ${n.bg || 'bg-white'} px-6 py-6 shadow-sm ring-2 ${isExpired ? 'ring-gray-300 grayscale opacity-60' : (n.color || 'ring-primary')}`}>
+                    {isExpired && (
+                      <div className="absolute inset-0 z-10 rounded-2xl bg-gray-200/20 pointer-events-none" />
+                    )}
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-2">
+                        {n.badge && (
+                          <span
+                            className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold ${isExpired ? 'bg-gray-400' : (n.badge === 'Convite' ? 'bg-primary text-white' : 'bg-secondary text-white')}`}
+                          >
+                            {n.badge}
+                          </span>
+                        )}
+                        {isExpired && <span className="inline-flex rounded-full bg-gray-800 text-white px-2 py-0.5 text-[10px] font-bold uppercase">Expirado</span>}
+                      </div>
+                      <div className="text-[11px] text-gray-600">{n.date}</div>
                     </div>
-                    <div className="text-[11px] text-gray-600">{n.date}</div>
+                    <div className="mt-3 text-sm font-semibold text-foreground">{n.title}</div>
+                    {n.description && (
+                      <p className="mt-2 text-xs text-gray-700 whitespace-pre-line leading-relaxed">
+                        {n.description}
+                      </p>
+                    )}
                   </div>
-                  <div className="mt-3 text-sm font-semibold text-foreground">{n.title}</div>
-                  {n.description && (
-                    <p className="mt-2 text-xs text-gray-700 whitespace-pre-line leading-relaxed">
-                      {n.description}
-                    </p>
-                  )}
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
