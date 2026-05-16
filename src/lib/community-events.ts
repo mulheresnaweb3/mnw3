@@ -66,7 +66,22 @@ export const communityEvents: CommunityEvent[] = [
     spots: '',
     expiryDate: '2026-04-11T23:59:59'
   },
-
+  {
+    title: 'Explorando a Web3 do Zero',
+    date: '19 de maio 2026 - 19h',
+    location: 'online - meet google',
+    description: 'Aprenda os fundamentos da Web3 de forma simples e prática',
+    coupon: '',
+    link: 'https://meet.google.com/atr-gfen-uec',
+    image: '/images/events/ufsc.png',
+    type: 'palestra',
+    badge: 'Destaque',
+    color: 'ring-primary',
+    isFeatured: true,
+    time: '',
+    spots: '',
+    expiryDate: '2026-05-19T23:59:59'
+  },
   // { 
   //   title: 'Parceria com Ethereum Foundation', 
   //   description: 'Temos o prazer de anunciar nossa nova parceria que trará grants e oportunidades para a comunidade!', 
